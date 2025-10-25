@@ -266,6 +266,44 @@
             width: 1.6rem;
             height: 1.6rem;
         }
+        
+        /* --- "What I Do" Section --- */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+        .service-item {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        .service-item:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+        .service-item svg {
+            width: 1.75rem;
+            height: 1.75rem;
+            color: var(--glowing-blue);
+            margin-bottom: 1rem;
+        }
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        .service-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--muted-color);
+            line-height: 1.6;
+        }
+        /* --- End "What I Do" Section --- */
+
 
         /* --- Portfolio Strip Styles (Marquee) --- */
         .portfolio-section {
@@ -275,9 +313,9 @@
         /* This container is now for the marquee */
         .portfolio-strip-container {
             display: flex;
-            overflow: hidden; /* Hide scrollbars, clip content */
+            overflow-x: hidden; /* Hide scrollbars, clip content */
             padding: 2rem 0;
-            /* Gradient fade effect on the edges */
+            /* Gradient fade effect on the edges - DESKTOP ONLY */
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
@@ -287,11 +325,11 @@
             display: flex;
             gap: 2rem;
             width: fit-content;
-            /* Apply animation */
+            /* Apply animation - DESKTOP ONLY */
             animation: marquee 30s linear infinite;
         }
         
-        /* Pause animation on hover */
+        /* Pause animation on hover - DESKTOP ONLY */
         .portfolio-strip-container:hover .portfolio-strip {
             animation-play-state: paused;
         }
@@ -410,9 +448,28 @@
         
         /* Removed scroll-arrow styles */
         
+        /* --- MOBILE OVERRIDES for Portfolio --- */
         @media (max-width: 768px) {
+            .portfolio-strip-container {
+                overflow-x: auto; /* ENABLE swiping */
+                -webkit-mask-image: none; /* REMOVE fade */
+                mask-image: none;
+                scroll-snap-type: x mandatory; /* ADD snap scrolling */
+                padding: 1rem; /* Add some padding */
+            }
+            
+            .portfolio-strip {
+                animation: none; /* DISABLE marquee animation */
+                padding: 0 1rem; /* Add padding for snap */
+            }
+
+            .portfolio-strip-container:hover .portfolio-strip {
+                animation-play-state: running; /* Keep it off */
+            }
+            
             .project-card {
-                width: 300px;
+                width: 280px; /* REDUCE card size for mobile */
+                scroll-snap-align: center; /* Snap to center */
             }
         }
 
@@ -638,6 +695,7 @@
                             </div>
                             <span class="project-card-arrow">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+
                             </span>
                         </div>
                         
@@ -674,10 +732,37 @@
                     As a BCA student, my focus is on the practical application of technology. I specialize in frontend development and leverage AI as a core part of my workflow to enhance efficiency and deliver refined results. I am committed to continuous learning and applying my skills to create solutions that are both effective and well-crafted. My goal is to contribute directly to project success by bringing a disciplined and modern approach to the table.
                 </p>
             </section>
+            
+            <!-- NEW "What I Do" Section -->
+            <section class="card fade-in-up" style="animation-delay: 500ms;">
+                <h2 class="section-label mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"></path><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"></path><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"></path><path d="M14 14.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-5z"></path><path d="M20.5 14H19v5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5c0-.83-.67-1.5-1.5-1.5z"></path><path d="M10 9.5c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 16.83 8 16v-5c0-.83.67-1.5 1.5-1.5z"></path><path d="M3.5 10H5V8.5c0-.83.67-1.5 1.5-1.5S8 7.67 8 8.5V10h-1.5C5.67 10 5 9.33 5 8.5S5.67 7 6.5 7 8 7.67 8 8.5V10H5V8.5C5 7.67 4.33 7 3.5 7S2 7.67 2 8.5 2.67 10 3.5 10z"></path></svg>
+                    <span>What I Do</span>
+                </h2>
+                <!-- THIS IS THE CORRECTED GRID -->
+                <div class="service-grid">
+                    <div class="service-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                        <h3 class="service-title">Bespoke Websites & Landing Pages</h3>
+                        <p class="service-description">Crafting complete, functional websites that serve as your go-to digital storefront and brand centerpiece.</p>
+                    </div>
+                    <div class="service-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9-9 9-9-1.8-9-9 1.8-9 9-9z"></path><path d="M8 12h8"></path><path d="M12 8v8"></path></svg>
+                        <h3 class="service-title">AI-Powered Content Strategy</h3>
+                        <p class="service-description">Using AI-driven insights to create high-quality blog posts and social media content that engages and converts.</p>
+                    </div>
+                    <div class="service-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3"></path><circle cx="12" cy="10" r="3"></circle><circle cx="12" cy="12" r="10"></circle></svg>
+                        <h3 class="service-title">Digital Presence & Branding</h3>
+                        <p class="service-description">Building your complete digital self, from the initial website concept to the content that defines your brand online.</p>
+                    </div>
+                </div>
+            </section>
+            
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <!-- Experience Section -->
-                <section class="card flex flex-col fade-in-up" style="animation-delay: 500ms;">
+                <section class="card flex flex-col fade-in-up" style="animation-delay: 600ms;">
                     <h2 class="section-label mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
                         <span>Experience</span>
@@ -692,7 +777,7 @@
                 </section>
 
                 <!-- Education Section -->
-                <section class="card flex flex-col fade-in-up" style="animation-delay: 600ms;">
+                <section class="card flex flex-col fade-in-up" style="animation-delay: 700ms;">
                     <h2 class="section-label mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 5 4 5 6 5s6-0 6-5v-5"></path></svg>
                         <span>Education</span>
@@ -708,7 +793,7 @@
             </div>
 
             <!-- Skills Section -->
-            <section class="card fade-in-up" style="animation-delay: 700ms;">
+            <section class="card fade-in-up" style="animation-delay: 800ms;">
                 <h2 class="section-label mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
                     <span>Core Skills</span>
@@ -719,12 +804,13 @@
                     <span class="skill-tag">Content Creation</span>
                     <span class="skill-tag">Content Writing</span>
                     <span class="skill-tag">Prompt Engineering</span>
+                    <!-- THIS IS THE FIX: 'classs' is now 'class' -->
                     <span class="skill-tag">Social Media Content</span>
                 </div>
             </section>
 
             <!-- Connect Section -->
-            <section class="card fade-in-up" style="animation-delay: 800ms;">
+            <section class="card fade-in-up" style="animation-delay: 900ms;">
                 <h2 class="section-label mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
                     <span>Connect</span>
@@ -752,7 +838,8 @@
         </div>
     </main>
     
-    <!-- NO SCRIPT NEEDED FOR MARQUEE -->
+    <!-- NO SCRIPT NEEDED FOR MARQUEE ON DESKTOP -->
 
 </body>
 </html>
+
