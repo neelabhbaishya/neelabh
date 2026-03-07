@@ -3,843 +3,1083 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neelabh Baishya - Portfolio & CV</title>
+    <title>Neelabh Baishya — Creative Developer & Designer</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fonts: Plus Jakarta Sans, Inter, and Courier Prime -->
+    <!-- Fonts: Plus Jakarta Sans, Space Grotesk, and Courier Prime -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;800&family=Inter:wght@400;500&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Dark Mode (Default) - Apple-inspired */
-            --page-bg-color: #0d0d0d;
-            --text-color: #ffffff;
-            --muted-color: #a0a0a0;
-            --border-color: rgba(255, 255, 255, 0.1); /* Subtle white border */
-            --primary-color: #ffffff;
-            --primary-text-color: #000000;
-            --aura-color: rgba(255, 255, 255, 0.09);
-            --card-bg-color: rgba(22, 22, 22, 0.6); /* Glassmorphism background */
-            --project-hover-bg: rgba(255, 255, 255, 0.05);
-            
-            /* New Colors */
-            --glowing-green: #34d399; /* Aesthetic green */
-            --glowing-blue: #3b82f6; /* Available badge blue */
+            --bg: #07090f;
+            --card-bg: rgba(12, 16, 28, 0.75);
+            --border: rgba(255, 255, 255, 0.07);
+            --border-accent: rgba(124, 58, 237, 0.35);
+            --text: #e8eaf0;
+            --muted: #8892a4;
+            --accent-violet: #7c3aed;
+            --accent-cyan: #06b6d4;
+            --accent-amber: #f59e0b;
+            --accent-green: #10b981;
         }
 
+        * { box-sizing: border-box; }
+
         /* Hide all scrollbars */
-        ::-webkit-scrollbar {
-            display: none;
-        }
+        ::-webkit-scrollbar { display: none; }
         body, .portfolio-strip-container {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
-        
+
         body {
-            background-color: var(--page-bg-color);
-            color: var(--text-color);
+            background-color: var(--bg);
+            color: var(--text);
             font-family: 'Plus Jakarta Sans', sans-serif;
-            cursor: default;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* --- Animated "Aurora" Background --- */
-        body::before {
-            content: '';
+        /* ─── Animated Orb Background ─── */
+        .bg-orbs {
             position: fixed;
-            width: 200vw; 
-            height: 200vh;
-            top: -50%;
-            left: -50%;
+            inset: 0;
             z-index: -1;
-            background: radial-gradient(ellipse at 30% 70%, rgba(10, 80, 200, 0.1) 0%, transparent 40%),
-                        radial-gradient(ellipse at 70% 20%, rgba(70, 150, 220, 0.1) 0%, transparent 40%),
-                        radial-gradient(ellipse at 50% 50%, rgba(40, 100, 255, 0.08) 0%, transparent 35%);
-            animation: moveBackground 35s infinite linear alternate;
+            overflow: hidden;
+            pointer-events: none;
         }
-
-        @keyframes moveBackground {
-            from {
-                transform: rotate(0deg) translate(0, 0);
-            }
-            to {
-                transform: rotate(45deg) translate(10%, 10%);
-            }
-        }
-
-        /* --- Restored Header Card Styles --- */
-        .intro-card {
-            background-color: var(--card-bg-color);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            padding: 2.5rem 2rem; /* Adjusted padding */
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.8s ease-out forwards;
-            
-            /* Flex layout for badge */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem; /* Space between items */
-        }
-        
-        .header-content {
-            text-align: center;
-        }
-
-        /* Headline: 'Courier Prime' */
-        .headline {
-            font-family: 'Courier Prime', monospace;
-            font-size: 2.25rem; /* 36px */
-            font-weight: 700;
-            color: var(--text-color);
-            margin: 0;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1.3;
-        }
-
-        /* Sub-text: NOW 'Courier Prime' */
-        .subtext {
-            font-family: 'Courier Prime', monospace;
-            font-weight: 400; /* Courier Prime regular */
-            font-size: 1.125rem; /* 18px */
-            color: var(--muted-color);
-            margin-top: 0.75rem; /* 12px */
-            margin-bottom: 0;
-            line-height: 1.6;
-            font-weight: 400;
-            max-width: 450px; /* Constrain line width */
-        }
-        
-        /* "Available for Work" Badge - GREEN */
-        .available-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text-color);
-            background-color: rgba(52, 211, 153, 0.1); /* Green tint */
-            border: 1px solid rgba(52, 211, 153, 0.3);
-            box-shadow: 0 0 15px rgba(52, 211, 153, 0.2);
-        }
-        .available-badge .dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--glowing-green);
+        .orb {
+            position: absolute;
             border-radius: 50%;
-            animation: pulse-green 1.5s infinite ease-in-out;
+            filter: blur(90px);
         }
-        
-        /* Glowing CTA Button - BLUE */
-        .cta-button-glow {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            
-            color: var(--text-color);
-            background-color: rgba(59, 130, 246, 0.1); /* Blue tint */
-            border: 1px solid rgba(59, 130, 246, 0.3);
-            
-            padding: 0.8rem 1.8rem;
+        .orb-1 {
+            width: 650px; height: 650px;
+            background: radial-gradient(circle, rgba(124,58,237,0.28) 0%, transparent 70%);
+            top: -150px; left: -200px;
+            animation: floatOrb 22s ease-in-out infinite alternate;
+        }
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(6,182,212,0.22) 0%, transparent 70%);
+            top: 35%; right: -150px;
+            animation: floatOrb 28s ease-in-out infinite alternate-reverse;
+        }
+        .orb-3 {
+            width: 420px; height: 420px;
+            background: radial-gradient(circle, rgba(245,158,11,0.14) 0%, transparent 70%);
+            bottom: -80px; left: 30%;
+            animation: floatOrb 19s ease-in-out infinite alternate;
+        }
+        @keyframes floatOrb {
+            from { transform: translate(0, 0) scale(1); }
+            to   { transform: translate(50px, 35px) scale(1.1); }
+        }
+
+        /* ─── Navigation ─── */
+        .nav {
+            position: fixed;
+            top: 1.25rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            background: rgba(7, 9, 15, 0.82);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border);
             border-radius: 50px;
+            padding: 0.7rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2.5rem;
+            min-width: 300px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+        }
+        .nav-brand {
+            font-family: 'Courier Prime', monospace;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--text);
             text-decoration: none;
-            display: inline-block;
-            
-            transition: transform 0.3s ease, 
-                        background-color 0.3s ease, 
-                        box-shadow 0.3s ease;
-            
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
-            animation: pulse-blue 2s infinite ease-in-out;
+            letter-spacing: 0.5px;
         }
-        
-        .cta-button-glow:hover {
-            transform: scale(1.05);
-            background-color: rgba(59, 130, 246, 0.2);
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.4);
-            animation-play-state: paused; /* Pause pulse on hover */
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            margin: 0; padding: 0;
         }
-        
-        /* Keyframes */
-        @keyframes pulse-blue {
-            0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+        .nav-links a {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            transition: color 0.2s;
         }
-        @keyframes pulse-green {
-            0%, 100% { box-shadow: 0 0 15px rgba(52, 211, 153, 0.2); }
-            50% { box-shadow: 0 0 20px rgba(52, 211, 153, 0.3); }
-        }
+        .nav-links a:hover { color: var(--text); }
 
         @media (max-width: 600px) {
-            .intro-card {
-                padding: 2rem 1.5rem;
-            }
-            .headline {
-                font-size: 1.75rem; /* Smaller on mobile */
-            }
-            .subtext {
-                font-size: 1rem; /* Smaller on mobile */
-            }
+            .nav { min-width: calc(100vw - 2rem); padding: 0.7rem 1.25rem; gap: 1rem; }
+            .nav-links { gap: 1rem; }
+            .nav-links li:nth-child(n+4) { display: none; }
         }
-        /* --- End Header Card Styles --- */
 
+        /* ─── Glass Card Base ─── */
+        .glass {
+            background: var(--card-bg);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+        .glass-hover {
+            transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+        }
+        .glass-hover:hover {
+            transform: translateY(-6px);
+            border-color: var(--border-accent);
+            box-shadow: 0 16px 48px rgba(124, 58, 237, 0.14);
+        }
 
+        /* ─── Section Label ─── */
         .section-label {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
+            gap: 0.6rem;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 1.8px;
-            color: var(--muted-color);
-            font-weight: 600;
+            font-size: 0.7rem;
+            letter-spacing: 2.5px;
+            color: var(--muted);
+            font-weight: 700;
             margin-bottom: 1.5rem;
         }
-
-        .section-label svg {
-            width: 1.25rem;
-            height: 1.25rem;
-        }
-        
-        .card {
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 2rem;
-            background-color: var(--card-bg-color);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        .label-dot {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--accent-violet);
+            flex-shrink: 0;
         }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 30px var(--aura-color);
-        }
-
-        .skill-tag {
-            display: inline-block;
-            padding: 0.6rem 1.2rem;
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            background-color: rgba(255, 255, 255, 0.03);
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-        }
-        .skill-tag:hover {
-            background-color: var(--primary-color);
-            color: var(--primary-text-color);
-            border-color: var(--primary-color);
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-
-        .social-link {
-            color: var(--muted-color);
-            transition: all 0.3s ease-in-out;
+        /* ─── Hero ─── */
+        .hero {
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 0;
-            cursor: pointer;
-        }
-        .social-link:hover {
-            color: var(--text-color);
-            transform: translateY(-2px) scale(1.02);
-        }
-        .social-link svg {
-            width: 1.6rem;
-            height: 1.6rem;
-        }
-        
-        /* --- "What I Do" Section --- */
-        .service-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-        .service-item {
-            background-color: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--border-color);
-            padding: 1.5rem;
-            border-radius: 16px;
-            transition: all 0.3s ease;
-        }
-        .service-item:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            transform: translateY(-5px);
-        }
-        .service-item svg {
-            width: 1.75rem;
-            height: 1.75rem;
-            color: var(--glowing-blue);
-            margin-bottom: 1rem;
-        }
-        .service-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-color);
-        }
-        .service-description {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            color: var(--muted-color);
-            line-height: 1.6;
-        }
-        /* --- End "What I Do" Section --- */
-
-
-        /* --- Portfolio Strip Styles (Marquee) --- */
-        .portfolio-section {
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 1.5rem 5rem;
             position: relative;
         }
-        
-        /* This container is now for the marquee */
-        .portfolio-strip-container {
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--accent-green);
+            background-color: rgba(16, 185, 129, 0.08);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            margin-bottom: 2.25rem;
+            letter-spacing: 0.5px;
+        }
+        .badge .pulse-dot {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            animation: pulseGreen 2s ease-in-out infinite;
+        }
+        @keyframes pulseGreen {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0.5); }
+            50%       { box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+        }
+        .hero-title {
+            font-family: 'Courier Prime', monospace;
+            font-size: clamp(3.2rem, 9vw, 7rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 1.5rem;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 35%, #7c3aed 65%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--muted);
+            max-width: 480px;
+            line-height: 1.75;
+            margin-bottom: 2.75rem;
+        }
+        .hero-actions {
             display: flex;
-            overflow-x: hidden; /* Hide scrollbars, clip content */
-            padding: 2rem 0;
-            /* Gradient fade effect on the edges - DESKTOP ONLY */
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn-primary {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #ffffff;
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 24px rgba(124, 58, 237, 0.35);
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(124, 58, 237, 0.55);
+        }
+        .btn-secondary {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            transition: background 0.3s, transform 0.3s, border-color 0.3s;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+            border-color: rgba(255,255,255,0.2);
+        }
+        .scroll-hint {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            color: var(--muted);
+            font-size: 0.68rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            animation: scrollBounce 2.5s ease-in-out infinite;
+        }
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50%       { transform: translateX(-50%) translateY(7px); }
         }
 
-        /* The strip holds the cards */
+        /* ─── Stats ─── */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        }
+        .stat-item {
+            text-align: center;
+            padding: 1.75rem 1rem;
+            border-right: 1px solid var(--border);
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-number {
+            font-family: 'Courier Prime', monospace;
+            font-size: 2.4rem;
+            font-weight: 700;
+            line-height: 1;
+            background: linear-gradient(135deg, #c4b5fd, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.4rem;
+        }
+        .stat-label {
+            font-size: 0.72rem;
+            color: var(--muted);
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+
+        /* ─── Portfolio Strip (Marquee) ─── */
+        .portfolio-strip-container {
+            display: flex;
+            overflow-x: hidden;
+            padding: 1.75rem 0;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+        }
         .portfolio-strip {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
             width: fit-content;
-            /* Apply animation - DESKTOP ONLY */
-            animation: marquee 30s linear infinite;
+            animation: marquee 35s linear infinite;
         }
-        
-        /* Pause animation on hover - DESKTOP ONLY */
         .portfolio-strip-container:hover .portfolio-strip {
             animation-play-state: paused;
         }
-
         @keyframes marquee {
             from { transform: translateX(0); }
-            to { transform: translateX(-50%); } /* Move by 50% (width of original cards) */
+            to   { transform: translateX(-50%); }
         }
-        
+
+        /* Project Card */
         .project-card {
-            border: 1px solid var(--border-color);
-            border-radius: 22px;
+            width: 340px;
+            flex-shrink: 0;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 18px;
             overflow: hidden;
-            background-color: var(--card-bg-color);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            text-decoration: none;
+            color: var(--text);
+            position: relative;
             display: flex;
             flex-direction: column;
-            text-decoration: none;
-            color: var(--text-color);
-            position: relative;
-            width: 350px;
-            flex-shrink: 0;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
-                        box-shadow 0.3s ease-in-out;
-            transform: scale(1); /* No pop by default */
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        box-shadow 0.3s ease,
+                        border-color 0.3s ease;
         }
-
-        /* Pop on hover */
         .project-card:hover {
-             transform: scale(1.08); /* Pop on hover */
-             box-shadow: 0 12px 35px var(--aura-color);
+            transform: scale(1.06);
+            box-shadow: 0 16px 48px rgba(124, 58, 237, 0.22);
+            border-color: rgba(124, 58, 237, 0.4);
         }
-
-        .project-thumbnail {
-            width: 100%;
-            height: 200px;
-            background-color: #1a1a1a;
+        .project-thumb {
+            height: 190px;
+            background: linear-gradient(135deg, #0d1117, #1a1f2e);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            position: relative;
+        }
+        .project-thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        .project-card:hover .project-thumb img { transform: scale(1.06); }
+        .project-thumb-empty {
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #0d1117 0%, #161c2d 45%, #1a2030 55%, #0d1117 100%);
+            background-size: 300% 100%;
+            animation: shimmer 4s ease-in-out infinite;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--muted-color);
-            font-size: 1.1rem;
-            font-weight: 500;
-            border-bottom: 1px solid var(--border-color);
-            overflow: hidden;
         }
-
-        .project-thumbnail img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s ease-out;
-        }
-
-        .project-card:hover .project-thumbnail img {
-            transform: scale(1.05);
-        }
-
-        .project-thumbnail-empty {
-            background: linear-gradient(110deg, #1a1a1a 40%, #2a2a2a 50%, #1a1a1a 60%);
-            background-size: 200% 100%;
-            animation: shimmer 3s infinite linear;
+        .placeholder-icon {
+            width: 42px; height: 42px;
+            border-radius: 12px;
+            background: rgba(124, 58, 237, 0.12);
+            border: 1px solid rgba(124, 58, 237, 0.22);
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(124, 58, 237, 0.55);
         }
         @keyframes shimmer {
-            from { background-position: 200% 0; }
-            to { background-position: -200% 0; }
+            0%, 100% { background-position: 0% 0; }
+            50%       { background-position: 100% 0; }
         }
-
-        .project-card-arrow {
-            position: absolute;
-            top: 1.25rem;
-            right: 1.25rem;
-            opacity: 0;
-            transform: translate(10px, -10px);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            padding: 0.5rem;
-        }
-        .project-card:hover .project-card-arrow {
-            opacity: 1;
-            transform: translate(0, 0);
-        }
-
-        .project-content {
-            padding: 1.5rem;
-            flex-grow: 1;
+        .project-body {
+            padding: 1.25rem;
+            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
         }
-        .project-title {
-            font-size: 1.25rem;
+        .project-name {
+            font-size: 1.05rem;
             font-weight: 700;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
-        .project-description {
-            font-size: 0.95rem;
-            color: var(--muted-color);
+        .project-desc {
+            font-size: 0.84rem;
+            color: var(--muted);
+            line-height: 1.55;
             margin-bottom: 1rem;
-            flex-grow: 1;
+            flex: 1;
         }
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
         .project-tag {
-            background-color: rgba(255, 255, 255, 0.08);
-            color: var(--text-color);
-            padding: 0.3rem 0.7rem;
-            border-radius: 8px;
-            font-size: 0.75rem;
+            font-size: 0.69rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            padding: 0.25rem 0.65rem;
+            border-radius: 6px;
+            background: rgba(124, 58, 237, 0.1);
+            color: #a78bfa;
+            border: 1px solid rgba(124, 58, 237, 0.2);
         }
-        
-        /* Removed scroll-arrow styles */
-        
-        /* --- MOBILE OVERRIDES for Portfolio --- */
+        .project-arrow {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            background: rgba(124, 58, 237, 0.15);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            display: flex; align-items: center; justify-content: center;
+            color: #a78bfa;
+            opacity: 0;
+            transform: translate(8px, -8px);
+            transition: all 0.3s ease;
+        }
+        .project-card:hover .project-arrow {
+            opacity: 1;
+            transform: translate(0, 0);
+        }
+
         @media (max-width: 768px) {
             .portfolio-strip-container {
-                overflow-x: auto; /* ENABLE swiping */
-                -webkit-mask-image: none; /* REMOVE fade */
+                overflow-x: auto;
+                -webkit-mask-image: none;
                 mask-image: none;
-                scroll-snap-type: x mandatory; /* ADD snap scrolling */
-                padding: 1rem; /* Add some padding */
+                scroll-snap-type: x mandatory;
+                padding: 1rem;
             }
-            
             .portfolio-strip {
-                animation: none; /* DISABLE marquee animation */
-                padding: 0 1rem; /* Add padding for snap */
+                animation: none;
+                padding: 0 0.5rem;
             }
-
             .portfolio-strip-container:hover .portfolio-strip {
-                animation-play-state: running; /* Keep it off */
+                animation-play-state: running;
             }
-            
-            .project-card {
-                width: 280px; /* REDUCE card size for mobile */
-                scroll-snap-align: center; /* Snap to center */
-            }
+            .project-card { width: 280px; scroll-snap-align: center; }
         }
 
+        /* ─── Service Cards ─── */
+        .service-card {
+            padding: 1rem;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            background: rgba(124, 58, 237, 0.07);
+            border-color: rgba(124, 58, 237, 0.25);
+            transform: translateY(-3px);
+        }
+        .service-icon {
+            width: 34px; height: 34px;
+            border-radius: 9px;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 0.6rem;
+        }
+        .service-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text);
+        }
 
-        /* --- Animations --- */
+        /* ─── Timeline ─── */
+        .timeline-item {
+            position: relative;
+            padding-left: 1.75rem;
+            padding-bottom: 1.5rem;
+        }
+        .timeline-item:last-child { padding-bottom: 0; }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 4px; top: 14px;
+            width: 2px;
+            height: calc(100% - 14px);
+            background: linear-gradient(to bottom, var(--accent-violet), transparent);
+        }
+        .timeline-item:last-child::before { display: none; }
+        .timeline-dot {
+            position: absolute;
+            left: 0; top: 8px;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--accent-violet);
+            box-shadow: 0 0 8px rgba(124, 58, 237, 0.6);
+        }
+        .timeline-year {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent-violet);
+            margin-bottom: 0.25rem;
+        }
+        .timeline-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+        }
+        .timeline-org {
+            font-size: 0.84rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-desc {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.65;
+        }
+
+        /* ─── Skill Pills ─── */
+        .skill-category { margin-bottom: 1.5rem; }
+        .skill-category:last-child { margin-bottom: 0; }
+        .skill-category-label {
+            font-size: 0.69rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 0.75rem;
+        }
+        .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .skill-pill {
+            font-size: 0.82rem;
+            font-weight: 500;
+            padding: 0.4rem 0.9rem;
+            border-radius: 8px;
+            border: 1px solid;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .skill-pill:hover { transform: scale(1.06); }
+        .pill-violet {
+            background: rgba(124, 58, 237, 0.1);
+            border-color: rgba(124, 58, 237, 0.25);
+            color: #c4b5fd;
+        }
+        .pill-violet:hover { background: rgba(124, 58, 237, 0.2); }
+        .pill-cyan {
+            background: rgba(6, 182, 212, 0.1);
+            border-color: rgba(6, 182, 212, 0.25);
+            color: #67e8f9;
+        }
+        .pill-cyan:hover { background: rgba(6, 182, 212, 0.2); }
+        .pill-amber {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.25);
+            color: #fcd34d;
+        }
+        .pill-amber:hover { background: rgba(245, 158, 11, 0.2); }
+
+        /* ─── Social Buttons ─── */
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.25rem;
+            border-radius: 50px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--muted);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        .social-btn:hover {
+            color: var(--text);
+            border-color: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.07);
+            transform: translateY(-2px);
+        }
+        .social-btn svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+        /* ─── Scroll Reveal ─── */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
-        .fade-in-up {
+        .fade-in {
             opacity: 0;
             animation: fadeInUp 0.7s ease-out forwards;
         }
+        /* Reveal: visible by default; JS hides below-fold elements for animation */
+        .reveal {
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal.below-fold {
+            opacity: 0;
+            transform: translateY(22px);
+        }
+        .reveal.below-fold.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ─── Footer ─── */
+        footer {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            font-size: 0.78rem;
+            color: var(--muted);
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+        footer .heart { color: #a78bfa; }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Main Container for other sections -->
-    <main class="container mx-auto max-w-4xl p-4 sm:p-8">
-        <div class="flex flex-col gap-12"> <!-- Increased gap between sections -->
+    <!-- Animated Background Orbs -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
 
-            <!-- New Header Card -->
-            <section class="intro-card" style="animation-delay: 100ms;">
-                <div class="available-badge">
-                    <span class="dot"></span>
-                    <span>Available for Work</span>
+    <!-- Floating Navigation -->
+    <nav class="nav fade-in" style="animation-delay: 50ms;">
+        <a href="#home" class="nav-brand">NB.</a>
+        <ul class="nav-links">
+            <li><a href="#work">Work</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#connect">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ── Hero ── -->
+    <section class="hero" id="home">
+        <div class="badge fade-in" style="animation-delay: 120ms;">
+            <span class="pulse-dot"></span>
+            <span>Available for Work</span>
+        </div>
+
+        <h1 class="hero-title fade-in" style="animation-delay: 250ms;">
+            Hi, I'm<br>
+            <span class="gradient-text">Neelabh.</span>
+        </h1>
+
+        <p class="hero-subtitle fade-in" style="animation-delay: 400ms;">
+            I make your story live — in code, in design,<br>in your digital self.
+        </p>
+
+        <div class="hero-actions fade-in" style="animation-delay: 550ms;">
+            <a href="#work" class="btn-secondary">View My Work</a>
+            <a href="mailto:neelabhbaishya@gmail.com" class="btn-primary" aria-label="Tell me your story — send an email">Tell Me Your Story <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="scroll-hint">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- ── Main Content ── -->
+    <main class="container mx-auto max-w-5xl px-4 sm:px-6 pb-16">
+        <div class="flex flex-col gap-10">
+
+            <!-- Stats Row -->
+            <div class="glass reveal">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">1+</div>
+                        <div class="stat-label">Projects Shipped</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">AI</div>
+                        <div class="stat-label">Powered Workflow</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Ideas Brewing</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">3rd</div>
+                        <div class="stat-label">BCA Semester</div>
+                    </div>
                 </div>
-                
-                <div class="header-content">
-                    <h1 class="headline">HI, I'M NEELABH,</h1>
-                    <p class="subtext">and I am going to make your story live.<br>In Code, In Design, In your Digital Self.</p>
-                </div>
-                
-                <a href="mailto:neelabhbaishya@gmail.com" class="cta-button-glow">TELL ME YOUR STORY →</a>
-            </section>
+            </div>
 
             <!-- Portfolio Section -->
-            <section class="portfolio-section fade-in-up" style="animation-delay: 300ms;">
-                <h2 class="section-label mb-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
-                    <span>Portfolio</span>
-                </h2>
-                
-                <!-- Scrollable Container -->
-                <div id="portfolio-container" class="portfolio-strip-container">
-                    <div id="portfolio-strip" class="portfolio-strip">
+            <section id="work" class="reveal">
+                <div class="section-label">
+                    <span class="label-dot"></span>
+                    <span>Work</span>
+                </div>
+
+                <div class="portfolio-strip-container">
+                    <div class="portfolio-strip" id="portfolio-strip">
+
                         <!-- Project 1 -->
                         <a href="https://mujtahidportfolio.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-card">
-                            <div class="project-thumbnail">
-                                <img src="https://assets-global.website-files.com/657512726487e35b7501a57f/657512726487e35b7501a580_preview-mujtahid.webp" alt="Mujtahid Portfolio Preview" class="w-full h-full object-cover">
+                            <div class="project-thumb">
+                                <img src="https://assets-global.website-files.com/657512726487e35b7501a57f/657512726487e35b7501a580_preview-mujtahid.webp" alt="Mujtahid Portfolio Preview">
                             </div>
-                            <div class="project-content">
+                            <div class="project-body">
                                 <div>
-                                    <h3 class="project-title">Mujtahid Portfolio Site</h3>
-                                    <p class="project-description">A personal portfolio website showcasing work, skills, and contact information with a modern, minimalist design.</p>
+                                    <h3 class="project-name">Mujtahid Portfolio Site</h3>
+                                    <p class="project-desc">A personal portfolio website showcasing work, skills, and contact information with a modern, minimalist design.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span class="project-tag">Frontend</span>
-                                    <span class="project-tag">Personal Portfolio</span>
+                                    <span class="project-tag">Portfolio</span>
                                     <span class="project-tag">Responsive</span>
                                 </div>
                             </div>
-                            <span class="project-card-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </span>
+                            <div class="project-arrow">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+                            </div>
                         </a>
 
-                        <!-- Project 2 (Empty Placeholder) -->
+                        <!-- Project 2 -->
                         <div class="project-card">
-                            <div class="project-thumbnail project-thumbnail-empty">
-                                <!-- Animated Gradient -->
+                            <div class="project-thumb">
+                                <div class="project-thumb-empty">
+                                    <div class="placeholder-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="project-content">
+                            <div class="project-body">
                                 <div>
-                                    <h3 class="project-title">Project Title 2</h3>
-                                    <p class="project-description">Description of a future project. This space will showcase a new web application or content piece.</p>
+                                    <h3 class="project-name">Project Title 2</h3>
+                                    <p class="project-desc">Description of a future project. This space will showcase a new web application or content piece.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span class="project-tag">Web Dev</span>
                                     <span class="project-tag">AI Integration</span>
                                 </div>
                             </div>
-                            <span class="project-card-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </span>
                         </div>
 
-                        <!-- Project 3 (Empty Placeholder) -->
+                        <!-- Project 3 -->
                         <div class="project-card">
-                            <div class="project-thumbnail project-thumbnail-empty">
-                                <!-- Animated Gradient -->
+                            <div class="project-thumb">
+                                <div class="project-thumb-empty">
+                                    <div class="placeholder-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="project-content">
+                            <div class="project-body">
                                 <div>
-                                    <h3 class="project-title">Project Title 3</h3>
-                                    <p class="project-description">Another upcoming project demonstrating new skills or a different area of expertise.</p>
+                                    <h3 class="project-name">Project Title 3</h3>
+                                    <p class="project-desc">Another upcoming project demonstrating new skills or a different area of expertise.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span class="project-tag">Content</span>
                                     <span class="project-tag">Strategy</span>
                                 </div>
                             </div>
-                            <span class="project-card-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </span>
                         </div>
 
-                        <!-- Project 4 (Empty Placeholder) -->
+                        <!-- Project 4 -->
                         <div class="project-card">
-                            <div class="project-thumbnail project-thumbnail-empty">
-                                <!-- Animated Gradient -->
+                            <div class="project-thumb">
+                                <div class="project-thumb-empty">
+                                    <div class="placeholder-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="project-content">
+                            <div class="project-body">
                                 <div>
-                                    <h3 class="project-title">Project Title 4</h3>
-                                    <p class="project-description">A fourth placeholder for a project, potentially focusing on a specialized tech or creative endeavor.</p>
+                                    <h3 class="project-name">Project Title 4</h3>
+                                    <p class="project-desc">A fourth placeholder focusing on a specialized tech or creative endeavor.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span class="project-tag">UI/UX</span>
                                     <span class="project-tag">Design</span>
                                 </div>
                             </div>
-                            <span class="project-card-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </span>
                         </div>
-                        
+
                         <!-- Project 5 -->
-                         <div class="project-card">
-                            <div class="project-thumbnail project-thumbnail-empty">
-                                <!-- Animated Gradient -->
+                        <div class="project-card">
+                            <div class="project-thumb">
+                                <div class="project-thumb-empty">
+                                    <div class="placeholder-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="project-content">
+                            <div class="project-body">
                                 <div>
-                                    <h3 class="project-title">Project Title 5</h3>
-                                    <p class="project-description">A fifth placeholder for a project.</p>
+                                    <h3 class="project-name">Project Title 5</h3>
+                                    <p class="project-desc">A fifth placeholder for an upcoming project venture.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span class="project-tag">Web3</span>
                                 </div>
                             </div>
-                            <span class="project-card-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </span>
                         </div>
 
                         <!-- CLONES FOR MARQUEE -->
-                        <!-- Project 1 -->
                         <a href="https://mujtahidportfolio.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-card">
-                            <div class="project-thumbnail">
-                                <img src="https://assets-global.website-files.com/657512726487e35b7501a57f/657512726487e35b7501a580_preview-mujtahid.webp" alt="Mujtahid Portfolio Preview" class="w-full h-full object-cover">
+                            <div class="project-thumb">
+                                <img src="https://assets-global.website-files.com/657512726487e35b7501a57f/657512726487e35b7501a580_preview-mujtahid.webp" alt="Mujtahid Portfolio Preview">
                             </div>
-                            <div class="project-content">
+                            <div class="project-body">
                                 <div>
-                                    <h3 class="project-title">Mujtahid Portfolio Site</h3>
-                                    <p class="project-description">A personal portfolio website showcasing work, skills, and contact information with a modern, minimalist design.</p>
+                                    <h3 class="project-name">Mujtahid Portfolio Site</h3>
+                                    <p class="project-desc">A personal portfolio website showcasing work, skills, and contact information with a modern, minimalist design.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span class="project-tag">Frontend</span>
-                                    <span class="project-tag">Personal Portfolio</span>
+                                    <span class="project-tag">Portfolio</span>
                                     <span class="project-tag">Responsive</span>
                                 </div>
                             </div>
-                            <span class="project-card-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </span>
-                        </a>
-
-                        <!-- Project 2 (Empty Placeholder) -->
-                        <div class="project-card">
-                            <div class="project-thumbnail project-thumbnail-empty">
-                                <!-- Animated Gradient -->
+                            <div class="project-arrow">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
                             </div>
-                            <div class="project-content">
+                        </a>
+                        <div class="project-card">
+                            <div class="project-thumb">
+                                <div class="project-thumb-empty">
+                                    <div class="placeholder-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-body">
                                 <div>
-                                    <h3 class="project-title">Project Title 2</h3>
-                                    <p class="project-description">Description of a future project. This space will showcase a new web application or content piece.</p>
+                                    <h3 class="project-name">Project Title 2</h3>
+                                    <p class="project-desc">Description of a future project. This space will showcase a new web application or content piece.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span class="project-tag">Web Dev</span>
                                     <span class="project-tag">AI Integration</span>
                                 </div>
                             </div>
-                            <span class="project-card-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </span>
                         </div>
-
-                        <!-- Project 3 (Empty Placeholder) -->
                         <div class="project-card">
-                            <div class="project-thumbnail project-thumbnail-empty">
-                                <!-- Animated Gradient -->
+                            <div class="project-thumb">
+                                <div class="project-thumb-empty">
+                                    <div class="placeholder-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="project-content">
+                            <div class="project-body">
                                 <div>
-                                    <h3 class="project-title">Project Title 3</h3>
-                                    <p class="project-description">Another upcoming project demonstrating new skills or a different area of expertise.</p>
+                                    <h3 class="project-name">Project Title 3</h3>
+                                    <p class="project-desc">Another upcoming project demonstrating new skills or a different area of expertise.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span class="project-tag">Content</span>
                                     <span class="project-tag">Strategy</span>
                                 </div>
                             </div>
-                            <span class="project-card-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </span>
                         </div>
-
-                        <!-- Project 4 (Empty Placeholder) -->
                         <div class="project-card">
-                            <div class="project-thumbnail project-thumbnail-empty">
-                                <!-- Animated Gradient -->
+                            <div class="project-thumb">
+                                <div class="project-thumb-empty">
+                                    <div class="placeholder-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="project-content">
+                            <div class="project-body">
                                 <div>
-                                    <h3 class="project-title">Project Title 4</h3>
-                                    <p class="project-description">A fourth placeholder for a project, potentially focusing on a specialized tech or creative endeavor.</p>
+                                    <h3 class="project-name">Project Title 4</h3>
+                                    <p class="project-desc">A fourth placeholder focusing on a specialized tech or creative endeavor.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span class="project-tag">UI/UX</span>
                                     <span class="project-tag">Design</span>
                                 </div>
                             </div>
-                            <span class="project-card-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-
-                            </span>
                         </div>
-                        
-                        <!-- Project 5 -->
-                         <div class="project-card">
-                            <div class="project-thumbnail project-thumbnail-empty">
-                                <!-- Animated Gradient -->
+                        <div class="project-card">
+                            <div class="project-thumb">
+                                <div class="project-thumb-empty">
+                                    <div class="placeholder-icon">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="project-content">
+                            <div class="project-body">
                                 <div>
-                                    <h3 class="project-title">Project Title 5</h3>
-                                    <p class="project-description">A fifth placeholder for a project.</p>
+                                    <h3 class="project-name">Project Title 5</h3>
+                                    <p class="project-desc">A fifth placeholder for an upcoming project venture.</p>
                                 </div>
                                 <div class="project-tags">
                                     <span class="project-tag">Web3</span>
                                 </div>
                             </div>
-                            <span class="project-card-arrow">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </span>
                         </div>
-                        
-                    </div> <!-- End .portfolio-strip -->
-                </div> <!-- End .portfolio-strip-container -->
+
+                    </div><!-- end .portfolio-strip -->
+                </div><!-- end .portfolio-strip-container -->
             </section>
 
-            <!-- About Section -->
-            <section class="card fade-in-up" style="animation-delay: 400ms;">
-                <h2 class="section-label mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                    <span>About</span>
-                </h2>
-                <p class="text-base md:text-lg leading-relaxed" style="color: var(--muted-color); font-family: 'Inter', sans-serif;">
-                    As a BCA student, my focus is on the practical application of technology. I specialize in frontend development and leverage AI as a core part of my workflow to enhance efficiency and deliver refined results. I am committed to continuous learning and applying my skills to create solutions that are both effective and well-crafted. My goal is to contribute directly to project success by bringing a disciplined and modern approach to the table.
-                </p>
-            </section>
-            
-            <!-- NEW "What I Do" Section -->
-            <section class="card fade-in-up" style="animation-delay: 500ms;">
-                <h2 class="section-label mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"></path><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"></path><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"></path><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"></path><path d="M14 14.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-5z"></path><path d="M20.5 14H19v5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5c0-.83-.67-1.5-1.5-1.5z"></path><path d="M10 9.5c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 16.83 8 16v-5c0-.83.67-1.5 1.5-1.5z"></path><path d="M3.5 10H5V8.5c0-.83.67-1.5 1.5-1.5S8 7.67 8 8.5V10h-1.5C5.67 10 5 9.33 5 8.5S5.67 7 6.5 7 8 7.67 8 8.5V10H5V8.5C5 7.67 4.33 7 3.5 7S2 7.67 2 8.5 2.67 10 3.5 10z"></path></svg>
-                    <span>What I Do</span>
-                </h2>
-                <!-- THIS IS THE CORRECTED GRID -->
-                <div class="service-grid">
-                    <div class="service-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                        <h3 class="service-title">Bespoke Websites & Landing Pages</h3>
-                        <p class="service-description">Crafting complete, functional websites that serve as your go-to digital storefront and brand centerpiece.</p>
-                    </div>
-                    <div class="service-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9-9 9-9-1.8-9-9 1.8-9 9-9z"></path><path d="M8 12h8"></path><path d="M12 8v8"></path></svg>
-                        <h3 class="service-title">AI-Powered Content Strategy</h3>
-                        <p class="service-description">Using AI-driven insights to create high-quality blog posts and social media content that engages and converts.</p>
-                    </div>
-                    <div class="service-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3"></path><circle cx="12" cy="10" r="3"></circle><circle cx="12" cy="12" r="10"></circle></svg>
-                        <h3 class="service-title">Digital Presence & Branding</h3>
-                        <p class="service-description">Building your complete digital self, from the initial website concept to the content that defines your brand online.</p>
-                    </div>
-                </div>
-            </section>
-            
+            <!-- ── Bento: About + Services ── -->
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6" id="about">
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Experience Section -->
-                <section class="card flex flex-col fade-in-up" style="animation-delay: 600ms;">
-                    <h2 class="section-label mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-                        <span>Experience</span>
-                    </h2>
-                    <div class="flex-grow">
-                        <h3 class="font-bold text-lg">Content Writer Intern</h3>
-                        <p class="font-medium" style="color: var(--primary-color);">tapnex.tech</p>
-                        <p class="mt-2 text-sm leading-relaxed" style="color: var(--muted-color); font-family: 'Inter', sans-serif;">
-                            My role involves researching and writing insightful blog posts on technology trends. I collaborate with the marketing team to create engaging content for various social media platforms, helping to grow the company's online presence.
-                        </p>
-                    </div>
+                <!-- About (3 cols) -->
+                <section class="glass glass-hover reveal lg:col-span-3" style="padding: 2rem;">
+                    <div class="section-label"><span class="label-dot"></span><span>About</span></div>
+                    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--muted); font-family: 'Space Grotesk', sans-serif;">
+                        As a <strong style="color: var(--text); font-weight: 700;">BCA student</strong>, my focus is on the practical application of technology. I specialise in <strong style="color: var(--text); font-weight: 700;">frontend development</strong> and leverage AI as a core part of my workflow to enhance efficiency and deliver refined results.
+                    </p>
+                    <p style="font-size: 1.05rem; line-height: 1.8; color: var(--muted); margin-top: 1rem; font-family: 'Space Grotesk', sans-serif;">
+                        I'm committed to continuous learning and bringing a disciplined, modern approach to every project — creating solutions that are both <em style="color: #a78bfa;">effective and well-crafted</em>.
+                    </p>
                 </section>
 
-                <!-- Education Section -->
-                <section class="card flex flex-col fade-in-up" style="animation-delay: 700ms;">
-                    <h2 class="section-label mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c0 5 4 5 6 5s6-0 6-5v-5"></path></svg>
-                        <span>Education</span>
-                    </h2>
-                     <div class="flex-grow">
-                        <h3 class="font-bold text-lg">Bachelor of Computer Applications (BCA)</h3>
-                        <p class="font-medium" style="color: var(--primary-color);">Girijananda Choudhury University</p>
-                        <p class="mt-2 text-sm" style="color: var(--muted-color); font-family: 'Inter', sans-serif;">
-                            Currently in the third semester, focusing on core computer science concepts, programming, and web technologies.
-                        </p>
+                <!-- Services (2 cols) -->
+                <section class="glass glass-hover reveal lg:col-span-2" style="padding: 2rem;">
+                    <div class="section-label"><span class="label-dot"></span><span>What I Do</span></div>
+                    <div class="flex flex-col gap-3">
+                        <div class="service-card">
+                            <div class="service-icon" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);color:var(--accent-cyan);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                            </div>
+                            <p class="service-title">Bespoke Websites &amp; Landing Pages</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon" style="background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.2);color:var(--accent-violet);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            </div>
+                            <p class="service-title">AI-Powered Content Strategy</p>
+                        </div>
+                        <div class="service-card">
+                            <div class="service-icon" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:var(--accent-amber);">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+                            </div>
+                            <p class="service-title">Digital Presence &amp; Branding</p>
+                        </div>
                     </div>
                 </section>
             </div>
 
-            <!-- Skills Section -->
-            <section class="card fade-in-up" style="animation-delay: 800ms;">
-                <h2 class="section-label mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                    <span>Core Skills</span>
-                </h2>
-                <div class="flex flex-wrap gap-3">
-                    <span class="skill-tag">Frontend Web Development</span>
-                    <span class="skill-tag">AI-Powered Workflows</span>
-                    <span class="skill-tag">Content Creation</span>
-                    <span class="skill-tag">Content Writing</span>
-                    <span class="skill-tag">Prompt Engineering</span>
-                    <!-- THIS IS THE FIX: 'classs' is now 'class' -->
-                    <span class="skill-tag">Social Media Content</span>
+            <!-- ── Experience &amp; Education ── -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <section class="glass glass-hover reveal" style="padding: 2rem;">
+                    <div class="section-label"><span class="label-dot"></span><span>Experience</span></div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-year">2024 — Present</div>
+                        <div class="timeline-title">Content Writer Intern</div>
+                        <div class="timeline-org">tapnex.tech</div>
+                        <div class="timeline-desc">Researching and writing insightful blog posts on technology trends. Collaborating with the marketing team to create engaging content for social media platforms, growing the company's online presence.</div>
+                    </div>
+                </section>
+
+                <section class="glass glass-hover reveal" style="padding: 2rem;">
+                    <div class="section-label">
+                        <span class="label-dot" style="background: var(--accent-cyan);"></span>
+                        <span>Education</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot" style="background: var(--accent-cyan); box-shadow: 0 0 8px rgba(6,182,212,0.55);"></div>
+                        <div class="timeline-year" style="color: var(--accent-cyan);">2023 — Present</div>
+                        <div class="timeline-title">Bachelor of Computer Applications</div>
+                        <div class="timeline-org">Girijananda Choudhury University</div>
+                        <div class="timeline-desc">Currently in the third semester, focusing on core computer science concepts, programming, and web technologies.</div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- ── Skills ── -->
+            <section class="glass glass-hover reveal" id="skills" style="padding: 2rem;">
+                <div class="section-label"><span class="label-dot"></span><span>Core Skills</span></div>
+
+                <div class="skill-category">
+                    <div class="skill-category-label">Development</div>
+                    <div class="skill-pills">
+                        <span class="skill-pill pill-violet">Frontend Web Development</span>
+                        <span class="skill-pill pill-violet">HTML / CSS</span>
+                        <span class="skill-pill pill-violet">JavaScript</span>
+                        <span class="skill-pill pill-violet">Tailwind CSS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-label">AI &amp; Content</div>
+                    <div class="skill-pills">
+                        <span class="skill-pill pill-cyan">AI-Powered Workflows</span>
+                        <span class="skill-pill pill-cyan">Prompt Engineering</span>
+                        <span class="skill-pill pill-cyan">Content Writing</span>
+                        <span class="skill-pill pill-cyan">Content Creation</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-label">Creative &amp; Marketing</div>
+                    <div class="skill-pills">
+                        <span class="skill-pill pill-amber">Social Media Content</span>
+                        <span class="skill-pill pill-amber">Digital Branding</span>
+                        <span class="skill-pill pill-amber">UI/UX Thinking</span>
+                    </div>
                 </div>
             </section>
 
-            <!-- Connect Section -->
-            <section class="card fade-in-up" style="animation-delay: 900ms;">
-                <h2 class="section-label mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
-                    <span>Connect</span>
-                </h2>
-                <div class="flex flex-wrap items-center gap-6">
-                    <a href="https://www.instagram.com/neelobh?igsh=eWhrc29wbWRjZXFn" target="_blank" rel="noopener noreferrer" class="social-link inline-flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        <span>Instagram</span>
+            <!-- ── Connect ── -->
+            <section class="glass glass-hover reveal" id="connect" style="padding: 2rem;">
+                <div class="section-label"><span class="label-dot"></span><span>Connect</span></div>
+                <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 1.75rem; font-family: 'Space Grotesk', sans-serif; line-height: 1.7;">
+                    Let's build something great together. Reach out via any of the platforms below.
+                </p>
+                <div class="flex flex-wrap gap-3">
+                    <a href="https://www.instagram.com/neelobh?igsh=eWhrc29wbWRjZXFn" target="_blank" rel="noopener noreferrer" class="social-btn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                        Instagram
                     </a>
-                    <a href="https://github.com/neelabhbaishya" target="_blank" rel="noopener noreferrer" class="social-link inline-flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                        <span>GitHub</span>
+                    <a href="https://github.com/neelabhbaishya" target="_blank" rel="noopener noreferrer" class="social-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        GitHub
                     </a>
-                    <a href="https://www.linkedin.com/in/neelabh-baishya-a0a623268" target="_blank" rel="noopener noreferrer" class="social-link inline-flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-                        <span>LinkedIn</span>
+                    <a href="https://www.linkedin.com/in/neelabh-baishya-a0a623268" target="_blank" rel="noopener noreferrer" class="social-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                        LinkedIn
                     </a>
-                    <a href="mailto:neelabhbaishya@gmail.com" class="social-link inline-flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
-                        <span>Email</span>
+                    <a href="mailto:neelabhbaishya@gmail.com" class="social-btn">
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/></svg>
+                        Email
                     </a>
                 </div>
             </section>
 
         </div>
     </main>
-    
-    <!-- NO SCRIPT NEEDED FOR MARQUEE ON DESKTOP -->
+
+    <footer>
+        Crafted with <span class="heart">♥</span> by Neelabh Baishya &middot; 2025
+    </footer>
+
+    <script>
+        // Scroll-reveal: only animate elements that start below the visible fold
+        const reveals = document.querySelectorAll('.reveal');
+        const vh = window.innerHeight;
+
+        // Mark only elements genuinely below the initial viewport
+        reveals.forEach(el => {
+            if (el.getBoundingClientRect().top >= vh) {
+                el.classList.add('below-fold');
+            }
+        });
+
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08 });
+
+        reveals.forEach(el => io.observe(el));
+    </script>
 
 </body>
 </html>
-
